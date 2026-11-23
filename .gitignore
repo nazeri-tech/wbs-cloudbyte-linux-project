@@ -15,6 +15,3 @@ Desktop.ini
 *.pem
 *.key
 *.env
-
-# Vagrant files
-.vagrant/
