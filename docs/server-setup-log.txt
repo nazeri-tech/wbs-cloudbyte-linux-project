@@ -1,0 +1,47 @@
+[24.11.2026] Admin's protocol:
+- Groups created
+-- engineering
+-- marketing
+-- operations
+-- admins
+
+- Users created
+-- alice
+-- bob
+-- carol
+-- dave
+-- emma
+-- frank
+-- grace
+-- henry
+-- iris
+-- jack
+-- kate
+-- leo
+
+- Assigned users to groups, updated the directory groups & permissions:
+-- Engineering: /shared/engineering (770)
+--- alice
+--- bob
+--- carol
+--- dave
+-- Marketing: /shared/marketing (770)
+--- emma
+--- frank
+--- grace
+-- Operations: /shared/operations (770)
+--- henry
+--- iris
+--- jack
+--- kate
+--- leo
+-- Admins (770)
+--- kate
+--- leo
+
+- Also created /shared/company-docs to share company-wide accessible documents. (775)
+- There is also a reports folder at /shared/logs/reports which contains logs for troubleshooting and controlling. (775)
+- Admins have write access to those 2 above directories.
+
+- I've tested permissions and people with no sufficient permissions do not have access.
+- One thing to do: when creating a new document in a shared folder, the owner of the file is the creator, so another user cannot update that file yet. The problem is recorded.
