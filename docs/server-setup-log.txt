@@ -45,3 +45,51 @@
 
 - I've tested permissions and people with no sufficient permissions do not have access.
 - One thing to do: when creating a new document in a shared folder, the owner of the file is the creator, so another user cannot update that file yet. The problem is recorded.
+- The shared folder has to be in the root level, so every user has the least access to it. If it is in root's home directory, then it is still not visible to others.
+
+$ ls -laR /shared
+/shared:
+total 0
+drwxrwxr-x.  7 ccl  ccl          92 Nov 24 09:20 .
+dr-xr-xr-x. 20 root root        263 Nov 24 09:46 ..
+drwxrwxr-x.  2 ccl  admins       22 Nov 24 10:19 company-docs
+drwxrwx---.  2 ccl  engineering  23 Nov 24 09:55 engineering
+drwxrwxr-x.  3 ccl  ccl          21 Nov 24 09:21 logs
+drwxrwx---.  2 ccl  marketing    23 Nov 24 09:57 marketing
+drwxrwx---.  2 ccl  operations   38 Nov 24 10:16 operations
+
+/shared/company-docs:
+total 4
+drwxrwxr-x. 2 ccl  admins 22 Nov 24 10:19 .
+drwxrwxr-x. 7 ccl  ccl    92 Nov 24 09:20 ..
+-rw-r--r--. 1 kate kate   11 Nov 24 10:19 memo.txt
+
+/shared/engineering:
+total 4
+drwxrwx---. 2 ccl   engineering 23 Nov 24 09:55 .
+drwxrwxr-x. 7 ccl   ccl         92 Nov 24 09:20 ..
+-rw-r--r--. 1 alice alice       14 Nov 24 09:55 README.md
+
+/shared/logs:
+total 0
+drwxrwxr-x. 3 ccl ccl    21 Nov 24 09:21 .
+drwxrwxr-x. 7 ccl ccl    92 Nov 24 09:20 ..
+drwxrwxr-x. 2 ccl admins  6 Nov 24 09:21 reports
+
+/shared/logs/reports:
+total 0
+drwxrwxr-x. 2 ccl admins  6 Nov 24 09:21 .
+drwxrwxr-x. 3 ccl ccl    21 Nov 24 09:21 ..
+
+/shared/marketing:
+total 4
+drwxrwx---. 2 ccl  marketing 23 Nov 24 09:57 .
+drwxrwxr-x. 7 ccl  ccl       92 Nov 24 09:20 ..
+-rw-r--r--. 1 emma emma      14 Nov 24 09:57 README.md
+
+/shared/operations:
+total 4
+drwxrwx---. 2 ccl   operations 38 Nov 24 10:16 .
+drwxrwxr-x. 7 ccl   ccl        92 Nov 24 09:20 ..
+-rw-r--r--. 1 henry henry      14 Nov 24 09:58 README.md
+-rw-r--r--. 1 kate  kate        0 Nov 24 10:16 test.md
