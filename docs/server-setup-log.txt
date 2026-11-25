@@ -99,3 +99,4 @@ drwxrwxr-x. 7 ccl   ccl        92 Nov 24 09:20 ..
 -- for existing files: chgrp [-R (recursive)] [target group] [target folder]
 -- for any new files: chmod [g+s or 2770/rwxrws---] [directory] to assign the setgid for the group, so every group member's new files in that folder would have the owner group not its own group (username)
 -- the /logs/reports folder belongs to / not in shared
+-- /host's source folder is ~/Desktop/WBS/wbs-linux-project and not ~/WBS/wbs-linux-project:´limactl edit cloudbyte´ to edit the config
