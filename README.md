@@ -16,7 +16,7 @@ Built the core of the server: four groups (`engineering`, `marketing`,
 
 | Group | Members |
 |---|---|
-| `engineering` | alice, bob, carol, dave |
+| `engineering` | alice, bob, carol, dave, morgan |
 | `marketing` | emma, frank, grace |
 | `operations` | henry, iris, jack, kate, leo |
 | `admins` | kate, leo |
