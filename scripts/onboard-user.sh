@@ -17,6 +17,11 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 TEMP_PASSWORD="ChangeMe123!"
+CSV_FILE=""
+
+if [ "$1" = "--csv" ]; then
+    CSV_FILE="$2"
+fi
 
 create_user() {
     local username="$1"
@@ -25,7 +30,6 @@ create_user() {
 
     if ! getent group "$group" >/dev/null 2>&1; then
         echo "Error: group '$group' does not exist for user '$username'."
-        echo "Hint: getent group | cut -d: -f1   to list available groups."
         return 1
     fi
 
@@ -42,8 +46,24 @@ create_user() {
     echo "Created $username in group $group with temp password (must change on first login)."
 }
 
-read -rp "Username: "  username
-read -rp "Group: "     group
-read -rp "Full name: " fullname
-
-create_user "$username" "$group" "$fullname"
+if [ -n "$CSV_FILE" ]; then
+    if [ ! -f "$CSV_FILE" ]; then
+        echo "Error: CSV file '$CSV_FILE' not found."
+        exit 3
+    fi
+    failures=0
+    { read -r _header
+      while IFS=, read -r u g f || [ -n "$u" ]; do
+          [ -z "$u" ] && continue
+          if ! create_user "$u" "$g" "$f"; then
+              failures=$((failures + 1))
+          fi
+      done
+    } < "$CSV_FILE"
+    [ "$failures" -gt 0 ] && exit 4 || exit 0
+else
+    read -rp "Username: "  username
+    read -rp "Group: "     group
+    read -rp "Full name: " fullname
+    create_user "$username" "$group" "$fullname"
+fi
